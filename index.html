@@ -1,1 +1,107 @@
-hello world！
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>tittle</title>
+    <style>
+        *{margin:0;padding:0;}
+        li{list-style:none;}
+        a{text-decoration: none;}
+        body{user-select: none;}
+        body{
+            overflow: hidden;
+            background-color: #000;
+        }
+    </style>
+</head>
+<body>
+    <canvas></canvas>
+    <script>
+        let anim ={
+            init(){
+                //数据初始化
+                this.oC = document.querySelector("canvas");
+                this.oCtx = this.oC.getContext("2d");
+                this.maxParticle = 100;
+                this.letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+                this.particles = [];
+
+                this.resize();
+                window.addEventListener("resize",()=>this.resize());
+
+                this.loop();
+            },
+            resize(){
+                //监听浏览器窗口的变化
+                this.w = this.oC.width = window.innerWidth;
+                this.h = this.oC.height = window.innerHeight;
+            },
+            render(){
+                this.fade();
+                //配置信息
+                this.particles.push({
+                    x : this.w/2,
+                    y : this.h,
+                    xSpeed : Math.random()*20-10,
+                    ySpeed : Math.random()*20-10,
+                    font : this.letters[Math.floor(Math.random()*this.letters.length)],
+                    color : [155,100,50,0.8]
+                });
+                this.clearParticle();
+                this.drawParticle();
+            },
+            drawParticle(){
+                //绘制
+                for (let i=0,len=this.particles.length;i<len;i++){
+                    let particle = this.particles[i];
+                    let h = particle.color[0];
+                    let s = particle.color[1] + "%";
+                    let l = particle.color[2] + "%";
+                    let a = particle.color[3];
+                    let hsla  = `hsla(${h},${s},${l},${a})`;
+
+                    this.oCtx.font = "15px 微软雅黑";
+                    this.oCtx.fillStyle = hsla;
+                    this.oCtx.fillText(particle.font,particle.x,particle.y);
+
+                    particle.x += particle.xSpeed;
+                    particle.y += particle.ySpeed;
+                    particle.y *= 0.98;
+
+                    particle.color[0] += 1;
+                    particle.color[2] *= 0.99;
+                    if (particle.color[0]>253){
+                        particle.color[2] = 100;
+                        particle.color[3] = 1;
+                    }
+                }
+            },
+            loop(){
+                //console.log(1);
+                //console.log(this);
+                //requestAnimationFrame(this.loop); //报错
+
+                // requestAnimationFrame(()=>this.loop());
+
+                // requestAnimationFrame((function () {
+                //     this.loop()
+                // }).bind(this));
+
+                this.render();
+
+                requestAnimationFrame(this.loop.bind(this));
+            },
+            clearParticle() {
+                if (this.particles.length>100){
+                    this.particles.shift();
+                }
+            },
+            fade(){
+                this.oCtx.fillStyle = "rgba(0,0,0,.1)";
+                this.oCtx.fillRect(0,0,this.w,this.h);
+            }
+        };
+        anim.init();
+    </script>
+</body>
+</html>
