@@ -59,16 +59,16 @@ $(function () {
             // 在播放下一句歌词之前把所有歌词变暗
             oP.css({
                 color: "#ccc",
-                fontSize: "40px"
+                fontSize: "16px"
             });
 
             curStart.css({
                 color: "red",
-                fontSize: "50px"
+                fontSize: "20px"
             });
 
             if (oP[7 + num].id == curTime) {
-                $(".content").css("top", -70 * num + "px");
+                $(".content").css("top", -24 * num + "px");
                 num++;
             }
 
@@ -114,7 +114,7 @@ $(function () {
         setTimeout(function () {
             oP.eq(0).css({
                 color: "#ccc",
-                fontSize: "40px"
+                fontSize: "16px"
             });
         }, 1)
 

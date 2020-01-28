@@ -4,12 +4,18 @@
     <meta charset="UTF-8"> <!--字符集设置-->
     <meta name="keywords" content=""> <!--keywords关键字-->
     <meta name="description" content="">    <!--description描述-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>个人音乐播放器</title>
     <style>
         *{margin:0;padding:0;}
         li{list-style:none;}
         a{text-decoration: none;}
-        body{user-select: none;background:lightskyblue;}
+        body{
+            user-select: none;
+            background:lightskyblue;
+            -webkit-tap-highlight-color:rgba(0,0,0,0); /*用来解决在安卓上的点击出现篮框问题*/
+        }
 
         #play{
             width: 100%;
@@ -23,32 +29,32 @@
 
         .top{
             width: 100%;
-            height: 70px;
+            height: 36px;
             background:#111111bf url("img/tt.PNG") 0 8px/contain no-repeat;
         }
 
         .title{
             width: 100%;
-            height: 120px;
-            background: url("img/ss.PNG") 0 0/cover  no-repeat;
-            font-size: 50px;
+            height: 50px;
+            background:#492c38 url("img/ss.PNG") 0 0/contain  no-repeat;
+            font-size: 24px;
             color:#ccc;
             font-weight: bold;
             text-align: center;
-            line-height: 120px;
+            line-height: 50px;
         }
         
         .singer{
             position: relative;
             width: 100%;
-            font-size: 40px;
-            line-height: 80px;
+            font-size: 16px;
+            line-height: 40px;
             text-align: center;
         }
 
         .start{
-            width: 430px;
-            height: 430px;
+            width: 130px;
+            height: 130px;
             background: url("img/music.jpg") 0 0 /contain  no-repeat;
             margin: auto;
             border-radius: 50%;
@@ -56,8 +62,8 @@
         }
 
         .lrc p{
-            line-height: 70px;
-            font-size: 40px;
+            line-height: 24px;
+            font-size: 16px;
             color:#ccc;
         }
         .lrc{
@@ -86,9 +92,9 @@
         }
 
         #btn{
-            width: 200px;
-            height: 100px;
-            font-size: 44px;
+            width: 60px;
+            height: 30px;
+            font-size: 16px;
             font-weight: bold;
         }
     </style>
